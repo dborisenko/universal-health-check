@@ -1,10 +1,10 @@
 # Universal health-check with minimum dependencies
 
-More details can be found in [this article](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/).
-
 [![Build Status](https://travis-ci.org/dborisenko/universal-health-check.svg?branch=master)](https://travis-ci.org/dborisenko/universal-health-check)
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn/universal-health-check-core_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn/universal-health-check-core_2.12)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
+
+More details can be found in [this article](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/).
 
 ## Usage
 
