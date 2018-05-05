@@ -9,7 +9,8 @@ object Dependencies {
 
     val scalatest = "3.0.5"
     val circe = "0.9.3"
-    val http4s = "0.18.9"
+    val http4s = "0.18.10"
+    val `cats-effect` = "1.0.0-RC"
   }
 
   lazy val paradise = "org.scalamacros" % "paradise" % Versions.paradise
@@ -19,4 +20,5 @@ object Dependencies {
   lazy val `http4s-blaze-server` = "org.http4s" %% "http4s-blaze-server" % Versions.http4s
   lazy val `http4s-circe` = "org.http4s" %% "http4s-circe" % Versions.http4s
   lazy val `http4s-dsl` = "org.http4s" %% "http4s-dsl" % Versions.http4s
+  lazy val `cats-effect` = "org.typelevel" %% "cats-effect" % Versions.`cats-effect`
 }

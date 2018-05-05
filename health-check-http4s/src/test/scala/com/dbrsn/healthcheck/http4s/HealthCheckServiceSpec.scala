@@ -1,10 +1,11 @@
-package com.dbrsn.healthcheck
+package com.dbrsn.healthcheck.http4s
 
 import cats.effect.IO
-import com.dbrsn.healthcheck.HealthCheckStatus.{Failure, Ok}
+import com.dbrsn.healthcheck.HealthCheck
+import com.dbrsn.healthcheck.HealthCheckStatus.{ Failure, Ok }
 import org.http4s.implicits._
-import org.http4s.{Method, Request, Response, Status, Uri}
-import org.scalatest.{FlatSpec, Matchers}
+import org.http4s.{ Method, Request, Response, Status, Uri }
+import org.scalatest.{ FlatSpec, Matchers }
 
 class HealthCheckServiceSpec extends FlatSpec with Matchers {
   private def healthCheck(check: => HealthCheck[IO]): Response[IO] = {

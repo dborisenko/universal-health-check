@@ -1,6 +1,7 @@
-package com.dbrsn.healthcheck
+package com.dbrsn.healthcheck.http4s
 
 import cats.effect.Effect
+import com.dbrsn.healthcheck.HealthCheck
 import fs2.StreamApp
 import org.http4s.HttpService
 import org.http4s.server.blaze.BlazeBuilder
@@ -13,7 +14,7 @@ final case class HttpServerConfig(
   port: Int
 )
 
-abstract class HealthCheckServer[F[_] : Effect](
+abstract class HealthCheckServer[F[_]: Effect](
   port: Int = 8080,
   host: String = "0.0.0.0",
   check: () => HealthCheck[F]
@@ -25,13 +26,13 @@ abstract class HealthCheckServer[F[_] : Effect](
 }
 
 object HealthCheckServer {
-  def apply[F[_] : Effect](
+  def apply[F[_]: Effect](
     config: HttpServerConfig, check: () => HealthCheck[F]
   )(implicit ec: ExecutionContext): HealthCheckServer[F] =
     new HealthCheckServer[F](config.port, config.host, check) {}
 }
 
-class HealthCheckStream[F[_] : Effect](port: Int, host: String, check: () => HealthCheck[F]) {
+class HealthCheckStream[F[_]: Effect](port: Int, host: String, check: () => HealthCheck[F]) {
 
   private val healthCheckService: HttpService[F] = new HealthCheckService[F](check).service
 

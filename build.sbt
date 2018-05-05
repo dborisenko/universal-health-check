@@ -52,8 +52,21 @@ lazy val macroParadiseSettings = Seq(
   addCompilerPlugin(Dependencies.paradise cross CrossVersion.full)
 )
 
-lazy val `universal-health-check` = (project in file("."))
+
+lazy val `health-check-core` = (project in file("health-check-core"))
   .settings(macroParadiseSettings)
+  .settings(wartremoverErrors ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.Overloading))
+  .settings(
+    libraryDependencies ++= Seq(
+      Dependencies.`cats-effect`
+    )
+  )
+
+lazy val `health-check-http4s` = (project in file("health-check-http4s"))
+  .settings(
+    wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing),
+    wartremoverErrors in (Test, compile) ++= Warts.allBut(Wart.Any, Wart.NonUnitStatements)
+  )
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`circe-generic`,
@@ -63,3 +76,4 @@ lazy val `universal-health-check` = (project in file("."))
       Dependencies.scalatest % Test
     )
   )
+  .dependsOn(`health-check-core`)
