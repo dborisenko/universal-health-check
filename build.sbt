@@ -1,5 +1,5 @@
 inThisBuild(List(
-  organization := "com.dbrsn.healthcheck",
+  organization := "com.dbrsn",
   scalaVersion := Dependencies.Versions.scala,
   scalacOptions := Seq(
     "-deprecation", // Warning and location for usages of deprecated APIs
@@ -53,7 +53,7 @@ lazy val macroParadiseSettings = Seq(
 )
 
 
-lazy val `health-check-core` = (project in file("health-check-core"))
+lazy val `universal-health-check-core` = (project in file("universal-health-check-core"))
   .settings(macroParadiseSettings)
   .settings(wartremoverErrors ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.Overloading))
   .settings(
@@ -62,7 +62,7 @@ lazy val `health-check-core` = (project in file("health-check-core"))
     )
   )
 
-lazy val `health-check-http4s` = (project in file("health-check-http4s"))
+lazy val `universal-health-check-http4s` = (project in file("universal-health-check-http4s"))
   .settings(
     wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing)
   )
@@ -75,4 +75,4 @@ lazy val `health-check-http4s` = (project in file("health-check-http4s"))
       Dependencies.scalatest % Test
     )
   )
-  .dependsOn(`health-check-core`)
+  .dependsOn(`universal-health-check-core`)
