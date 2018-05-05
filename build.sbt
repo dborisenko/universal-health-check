@@ -51,7 +51,9 @@ inThisBuild(List(
     if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at repo + "content/repositories/snapshots")
     else Some("releases" at repo + "service/local/staging/deploy/maven2")
   },
-  homepage := Some(url("https://github.com/dborisenko/universal-health-check"))
+  homepage := Some(url("https://github.com/dborisenko/universal-health-check")),
+  licenses := Seq("MIT License" -> url("https://github.com/dborisenko/universal-health-check/blob/master/LICENSE")),
+  scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git"))
 ))
 
 lazy val macroParadiseSettings = Seq(
