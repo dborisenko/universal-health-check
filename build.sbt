@@ -50,7 +50,8 @@ inThisBuild(List(
     val repo = "https://oss.sonatype.org/"
     if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at repo + "content/repositories/snapshots")
     else Some("releases" at repo + "service/local/staging/deploy/maven2")
-  }
+  },
+  homepage := Some(url("https://github.com/dborisenko/universal-health-check"))
 ))
 
 lazy val macroParadiseSettings = Seq(
