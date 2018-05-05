@@ -1,3 +1,8 @@
+import sbtrelease.ReleaseStateTransformations._
+import xerial.sbt.Sonatype.GitHubHosting
+import xerial.sbt.Sonatype.SonatypeCommand.sonatypeRelease
+import PgpKeys.publishSigned
+
 inThisBuild(List(
   organization := "com.dbrsn",
   scalaVersion := Dependencies.Versions.scala,
@@ -45,32 +50,41 @@ inThisBuild(List(
     "-Ywarn-unused:privates" // Warn if a private member is unused.
   ),
   resolvers += Resolver.sbtPluginRepo("releases"), // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
-  publishMavenStyle := true,
-  publishTo := {
-    val repo = "https://oss.sonatype.org/"
-    if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at repo + "content/repositories/snapshots")
-    else Some("releases" at repo + "service/local/staging/deploy/maven2")
-  },
-  homepage := Some(url("https://github.com/dborisenko/universal-health-check")),
-  licenses := Seq("MIT License" -> url("https://github.com/dborisenko/universal-health-check/blob/master/LICENSE")),
-  scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git")),
-  pomExtra :=
-    <developers>
-      <developer>
-        <id>Denis Borisenko</id>
-        <name>Denis Borisenko</name>
-        <url>http://dbrsn.com/</url>
-      </developer>
-    </developers>
+  publishArtifact := false
 ))
+
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  releaseStepTask(publishSigned),
+  releaseStepCommand(sonatypeRelease),
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
+)
 
 lazy val macroParadiseSettings = Seq(
   resolvers += Resolver.sonatypeRepo("releases"),
   addCompilerPlugin(Dependencies.paradise cross CrossVersion.full)
 )
 
+lazy val publishSettings = Seq(
+  publishTo := sonatypePublishTo.value,
+  licenses := Seq("MIT License" -> url("https://github.com/dborisenko/universal-health-check/blob/master/LICENSE")),
+  sonatypeProjectHosting := Some(GitHubHosting("dborisenko", "universal-health-check", "dborisenko@gmail.com")),
+  homepage := Some(url("https://github.com/dborisenko/universal-health-check")),
+  scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git")),
+  developers := List(Developer(id="Denis Borisenko", name="Denis Borisenko", email="dborisenko@gmail.com", url=url("http://dbrsn.com/")))
+)
+
 lazy val `universal-health-check-core` = (project in file("universal-health-check-core"))
   .settings(macroParadiseSettings)
+  .settings(publishSettings)
   .settings(wartremoverErrors ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.Overloading))
   .settings(
     libraryDependencies ++= Seq(
@@ -80,6 +94,7 @@ lazy val `universal-health-check-core` = (project in file("universal-health-chec
   )
 
 lazy val `universal-health-check-http4s` = (project in file("universal-health-check-http4s"))
+  .settings(publishSettings)
   .settings(
     wartremoverErrors in(Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing)
   )
