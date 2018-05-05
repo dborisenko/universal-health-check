@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/dborisenko/universal-health-check.svg?branch=master)](https://travis-ci.org/dborisenko/universal-health-check)
+[![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn/universal-health-check-core_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn/universal-health-check-core_2.12)
 
 # [Universal health-check without dependencies](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/)
 
