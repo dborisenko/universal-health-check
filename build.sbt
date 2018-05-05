@@ -44,20 +44,19 @@ inThisBuild(List(
     "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
     "-Ywarn-unused:privates" // Warn if a private member is unused.
   ),
-  resolvers += Resolver.sbtPluginRepo("releases") // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
+  resolvers += Resolver.sbtPluginRepo("releases"), // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
+  publishMavenStyle := true,
+  publishTo := {
+    val repo = "https://oss.sonatype.org/"
+    if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at repo + "content/repositories/snapshots")
+    else Some("releases" at repo + "service/local/staging/deploy/maven2")
+  }
 ))
 
 lazy val macroParadiseSettings = Seq(
   resolvers += Resolver.sonatypeRepo("releases"),
   addCompilerPlugin(Dependencies.paradise cross CrossVersion.full)
 )
-
-publishMavenStyle := true
-publishTo := {
-  val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
 
 lazy val `universal-health-check-core` = (project in file("universal-health-check-core"))
   .settings(macroParadiseSettings)
