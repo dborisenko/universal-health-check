@@ -1,11 +1,9 @@
+# Universal health-check with minimal dependencies
+
+More details can be found in [this article](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/).
+
 [![Build Status](https://travis-ci.org/dborisenko/universal-health-check.svg?branch=master)](https://travis-ci.org/dborisenko/universal-health-check)
 [![Maven Central](https://img.shields.io/maven-central/v/com.dbrsn/universal-health-check-core_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.dbrsn/universal-health-check-core_2.12)
-
-# [Universal health-check without dependencies](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/)
-
-## Health Check
-
-For simplicity reasons, we will use `circe` as a json library and `http4s` as http server. We would also like to keep ability to integrate health-checks into other http-servers (for example, in `akka-http`).
 
 ## Usage
 
