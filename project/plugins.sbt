@@ -9,3 +9,6 @@ addSbtPlugin("org.scalastyle" %% "scalastyle-sbt-plugin" % "1.0.0")
 
 // Flexible Scala code linting tool
 addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.2.1")
+
+// A release plugin for sbt
+addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.8")
