@@ -49,8 +49,7 @@ inThisBuild(List(
     "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
     "-Ywarn-unused:privates" // Warn if a private member is unused.
   ),
-  resolvers += Resolver.sbtPluginRepo("releases"), // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
-  publishArtifact := false
+  resolvers += Resolver.sbtPluginRepo("releases") // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
 ))
 
 releaseProcess := Seq[ReleaseStep](
@@ -109,3 +108,9 @@ lazy val `universal-health-check-http4s` = (project in file("universal-health-ch
     publishArtifact := true
   )
   .dependsOn(`universal-health-check-core`)
+
+lazy val `universal-health-check` = (project in file("."))
+  .settings(publishSettings)
+  .settings(publishArtifact := false)
+  .dependsOn(`universal-health-check-core`)
+  .dependsOn(`universal-health-check-http4s`)
