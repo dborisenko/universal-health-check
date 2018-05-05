@@ -53,6 +53,7 @@ lazy val macroParadiseSettings = Seq(
 )
 
 lazy val `universal-health-check` = (project in file("."))
+  .settings(macroParadiseSettings)
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`circe-generic`,
