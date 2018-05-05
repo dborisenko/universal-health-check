@@ -6,6 +6,13 @@
 
 For simplicity reasons, we will use `circe` as a json library and `http4s` as http server. We would also like to keep ability to integrate health-checks into other http-servers (for example, in `akka-http`).
 
+## Usage
+
+```scala
+libraryDependencies += "com.dbrsn" %% "universal-health-check-core" % "0.0.5"
+libraryDependencies += "com.dbrsn" %% "universal-health-check-http4s" % "0.0.5"
+```
+
 ## Model
 
 We will start with simple Status ADT with 2 possible data types: `Ok` and `Failure`.
