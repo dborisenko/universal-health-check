@@ -52,27 +52,24 @@ lazy val macroParadiseSettings = Seq(
   addCompilerPlugin(Dependencies.paradise cross CrossVersion.full)
 )
 
-lazy val publishSettings = Seq(
-  publishMavenStyle := true,
-  publishTo := {
-    val nexus = "https://oss.sonatype.org/"
-    if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
-    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-  }
-)
+publishMavenStyle := true
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+  else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
 
 lazy val `universal-health-check-core` = (project in file("universal-health-check-core"))
   .settings(macroParadiseSettings)
-  .settings(publishSettings)
   .settings(wartremoverErrors ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.Overloading))
   .settings(
     libraryDependencies ++= Seq(
       Dependencies.`cats-effect`
-    )
+    ),
+    publishArtifact := true
   )
 
 lazy val `universal-health-check-http4s` = (project in file("universal-health-check-http4s"))
-  .settings(publishSettings)
   .settings(
     wartremoverErrors in(Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing)
   )
@@ -83,6 +80,7 @@ lazy val `universal-health-check-http4s` = (project in file("universal-health-ch
       Dependencies.`http4s-circe`,
       Dependencies.`http4s-blaze-server`,
       Dependencies.scalatest % Test
-    )
+    ),
+    publishArtifact := true
   )
   .dependsOn(`universal-health-check-core`)
