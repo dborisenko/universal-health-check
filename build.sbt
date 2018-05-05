@@ -64,8 +64,7 @@ lazy val `health-check-core` = (project in file("health-check-core"))
 
 lazy val `health-check-http4s` = (project in file("health-check-http4s"))
   .settings(
-    wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing),
-    wartremoverErrors in (Test, compile) ++= Warts.allBut(Wart.Any, Wart.NonUnitStatements)
+    wartremoverErrors in (Compile, compile) ++= Warts.allBut(Wart.DefaultArguments, Wart.ImplicitParameter, Wart.PublicInference, Wart.Nothing)
   )
   .settings(
     libraryDependencies ++= Seq(
