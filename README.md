@@ -1,4 +1,4 @@
-# Universal health-check with minimal dependencies
+# Universal health-check with minimum dependencies
 
 More details can be found in [this article](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/).
 
