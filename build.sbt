@@ -53,7 +53,15 @@ inThisBuild(List(
   },
   homepage := Some(url("https://github.com/dborisenko/universal-health-check")),
   licenses := Seq("MIT License" -> url("https://github.com/dborisenko/universal-health-check/blob/master/LICENSE")),
-  scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git"))
+  scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git")),
+  pomExtra :=
+    <developers>
+      <developer>
+        <id>Denis Borisenko</id>
+        <name>Denis Borisenko</name>
+        <url>http://dbrsn.com/</url>
+      </developer>
+    </developers>
 ))
 
 lazy val macroParadiseSettings = Seq(
