@@ -1,7 +1,6 @@
 import sbtrelease.ReleaseStateTransformations._
 import xerial.sbt.Sonatype.GitHubHosting
 import xerial.sbt.Sonatype.SonatypeCommand.sonatypeRelease
-import PgpKeys.publishSigned
 
 inThisBuild(List(
   organization := "com.dbrsn",
@@ -52,6 +51,7 @@ inThisBuild(List(
   resolvers += Resolver.sbtPluginRepo("releases") // Fix for "Doc and src packages for 1.3.2 not found in repo1.maven.org" https://github.com/sbt/sbt-native-packager/issues/1063
 ))
 
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
@@ -60,7 +60,7 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  releaseStepTaskAggregated(publishSigned),
+  publishArtifacts,
   releaseStepCommand(sonatypeRelease),
   setNextVersion,
   commitNextVersion,
