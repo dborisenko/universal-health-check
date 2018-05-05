@@ -60,7 +60,7 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  releaseStepTask(publishSigned),
+  releaseStepTaskAggregated(publishSigned),
   releaseStepCommand(sonatypeRelease),
   setNextVersion,
   commitNextVersion,
@@ -112,5 +112,5 @@ lazy val `universal-health-check-http4s` = (project in file("universal-health-ch
 lazy val `universal-health-check` = (project in file("."))
   .settings(publishSettings)
   .settings(publishArtifact := false)
-  .dependsOn(`universal-health-check-core`)
-  .dependsOn(`universal-health-check-http4s`)
+  .aggregate(`universal-health-check-core`)
+  .aggregate(`universal-health-check-http4s`)
