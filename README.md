@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dborisenko/universal-health-check.svg?branch=master)](https://travis-ci.org/dborisenko/universal-health-check)
+
 # [Universal health-check without dependencies](http://dbrsn.com/2018-04-30-universal-health-check-without-dependencies/)
 
 ## Health Check
