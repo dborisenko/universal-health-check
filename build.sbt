@@ -77,7 +77,7 @@ lazy val publishSettings = Seq(
   sonatypeProjectHosting := Some(GitHubHosting("dborisenko", "universal-health-check", "dborisenko@gmail.com")),
   homepage := Some(url("https://github.com/dborisenko/universal-health-check")),
   scmInfo := Some(ScmInfo(url("https://github.com/dborisenko/universal-health-check"), "scm:git:git://github.com:dborisenko/universal-health-check.git")),
-  developers := List(Developer(id="Denis Borisenko", name="Denis Borisenko", email="dborisenko@gmail.com", url=url("http://dbrsn.com/")))
+  developers := List(Developer(id = "Denis Borisenko", name = "Denis Borisenko", email = "dborisenko@gmail.com", url = url("http://dbrsn.com/")))
 )
 
 lazy val `universal-health-check-core` = (project in file("universal-health-check-core"))
